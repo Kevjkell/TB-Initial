@@ -65,13 +65,15 @@
 
 //SET MAPVIEW
 
+var floodzone;
+	
 	$.ajax({
-		url: "https://raw.githubusercontent.com/Seanreseigh1/MSGISci-Webmap-New/master/Geojsons/Rivers_and_creeks.geojson",
+		url: "https://raw.githubusercontent.com/Kevjkell/TB-Initial/master/Geojsons/LB_floodzones.geojson",
 		dataType: 'json',
 		success: function (response) {
-			rivers_and_creeks = L.geoJson(response, {style: riverStyle, onEachFeature: highlight3}).bindPopup(function (layer){return 'Name:' + ' ' + '<a href="#">'+layer.feature.properties.NAME+'</a>';});
-			rivers_and_creeks.addTo(map);
-			layercontrol.addOverlay(rivers_and_creeks, 'Rivers and Creeks')
+			floodzone = L.geoJson(response).bindPopup(function (layer){return 'Flood zone type:' + ' ' + '<a href="#">'+layer.feature.properties.ZONE_TYPE+'</a>';});
+			floodzone.addTo(map);
+			layercontrol.addOverlay(floodzone, 'LB Floodzone')
 		}
 	});
 	
